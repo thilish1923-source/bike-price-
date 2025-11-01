@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bike Price Predictor 🚲✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #f9f3ff, #e2f0ff);
+      font-family: 'Outfit', sans-serif;
+    }
+    .container {
+      margin-top: 5%;
+      max-width: 650px;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+    h2 {
+      background: linear-gradient(to right, #ff4d4d, #6c63ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      text-align: center;
+    }
+    .btn-custom {
+      background: linear-gradient(to right, #6c63ff, #ff4d4d);
+      color: white;
+      border: none;
+      font-weight: 500;
+    }
+    .btn-custom:hover {
+      background: linear-gradient(to right, #ff4d4d, #6c63ff);
+    }
+    .form-group label {
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Bike Price Predictor 🚲</h2>
+    <form method="POST" action="/predict" class="mt-4">
+
+      <div class="form-group">
+        <label for="city">City</label>
+        <select class="form-control" name="city" required>
+          {% for c in city %}
+            <option value="{{ c }}">{{ c }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="owner">Owner</label>
+        <select class="form-control" name="owner" required>
+          {% for o in owner %}
+            <option value="{{ o }}">{{ o }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="brand">Brand</label>
+        <select class="form-control" name="brand" required>
+          {% for b in brand %}
+            <option value="{{ b }}">{{ b }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Kilometers Driven</label>
+        <input type="number" name="kms_driven" class="form-control" placeholder="e.g. 12000" required>
+      </div>
+
+      <div class="form-group">
+        <label>Bike Age (years)</label>
+        <input type="number" name="age" class="form-control" placeholder="e.g. 3" required>
+      </div>
+
+      <div class="form-group">
+        <label>Engine Power (cc)</label>
+        <input type="number" name="power" class="form-control" placeholder="e.g. 150" required>
+      </div>
+
+      <button type="submit" class="btn btn-custom btn-block">Predict Price 💸</button>
+    </form>
+
+    {% if prediction_text %}
+      <div class="alert alert-info text-center mt-4">
+        {{ prediction_text }}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
